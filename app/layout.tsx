@@ -1,11 +1,9 @@
+import HeroVideo from "@/components/background";
+import Sidebar from "@/components/navigation/sidebar";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import Link from "next/link";
-import HeroVideo from "@/components/background";
-import Sidebar from "@/components/navigation/sidebar";
-import StickyCursor from "@/components/stickyCursor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +23,8 @@ export default function RootLayout({
         <body className={inter.className}>
           <HeroVideo />
           <Sidebar />
-              {children}
-          </body>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

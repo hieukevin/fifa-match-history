@@ -7,26 +7,26 @@ import { InferSchemaType } from "mongoose";
 import { teamStats } from "@/models/models";
 
 const sideVariants = {
-    closed: {
-      transition: {
-        staggerChildren: 0.1,
-        staggerDirection: -1,
-      },
+  closed: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: -1,
     },
-    open: {
-      transition: {
-        staggerChildren: 0.1,
-        staggerDirection: 1,
-      },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: 1,
     },
-  };
+  },
+};
 
-  const itemVariants = {
-    closed: {
-      opacity: 0,
-    },
-    open: { opacity: 1 },
-  };
+const itemVariants = {
+  closed: {
+    opacity: 0,
+  },
+  open: { opacity: 1 },
+};
 
 export function DropdownStatsLeft({
   teamsStats,
@@ -46,18 +46,18 @@ export function DropdownStatsLeft({
         <button onClick={toggleOpen}>
           <IoIosArrowDown className="" />
         </button>
-        {isOpen && <p className="flex items-center justify-center ">W/D/L</p> }
-        {isOpen && <p className="flex items-center justify-center">Goals</p> }
+        {isOpen && <p className="flex items-center justify-center ">W/D/L</p>}
+        {isOpen && <p className="flex items-center justify-center">Goals</p>}
       </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-          className="flex flex-col gap-4"
-          initial="closed"
-          animate="open"
-          exit="closed"
-          variants={sideVariants}
-      >
+            className="flex flex-col gap-4"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={sideVariants}
+          >
             {teamsStats.map((team, index) => (
               <motion.div
                 key={index}

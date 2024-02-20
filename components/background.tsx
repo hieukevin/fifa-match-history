@@ -1,7 +1,5 @@
-import React from "react";
+import mobile from "@/public/messironaldomobile.jpg";
 import Image from "next/image";
-import phone from "@/public/phoneBackground.jpeg";
-import mobile from "@/public/peakpx.jpg";
 function HeroVideo() {
   return (
     <>
@@ -17,7 +15,6 @@ function HeroVideo() {
         </video>
       </div>
       <div className="sm:hidden block">
-        {/* <Image src={phone} alt="phone" layout="fill" objectFit="cover" objectPosition="center" className="fixed w-screen h-screen object-cover" /> */}
         <Image
           src={mobile}
           alt="phone"

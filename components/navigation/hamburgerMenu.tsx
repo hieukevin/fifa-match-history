@@ -1,9 +1,5 @@
 "use client";
-import {
-  AnimatePresence,
-  motion,
-  useAnimation
-} from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 
 export const path01Variants = {
   open: { d: "M3.06061 2.99999L21.0606 21" },
@@ -29,7 +25,6 @@ export default function HamburgerMenu({
   path02Controls: ReturnType<typeof useAnimation>;
   className?: string;
 }) {
-  
   const onClick = async () => {
     setOpen(!isOpen);
     if (!isOpen) {
@@ -45,22 +40,22 @@ export default function HamburgerMenu({
 
   return (
     <AnimatePresence initial={false}>
-    <button onClick={onClick} className={className}>
-      <svg width="24" height="24" viewBox="0 0 24 24">
-        <motion.path
-          {...path01Variants.closed}
-          animate={path01Controls}
-          transition={{ duration: 0.3 }}
-          stroke={isOpen ? '#000' : '#FFF'}
-        />
-        <motion.path
-          {...path02Variants.closed}
-          animate={path02Controls}
-          transition={{ duration: 0.3 }}
-          stroke={isOpen ? '#000' : '#FFF'}
-        />
-      </svg>
-    </button>
+      <button onClick={onClick} className={className}>
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <motion.path
+            {...path01Variants.closed}
+            animate={path01Controls}
+            transition={{ duration: 0.3 }}
+            stroke={isOpen ? "#000" : "#FFF"}
+          />
+          <motion.path
+            {...path02Variants.closed}
+            animate={path02Controls}
+            transition={{ duration: 0.3 }}
+            stroke={isOpen ? "#000" : "#FFF"}
+          />
+        </svg>
+      </button>
     </AnimatePresence>
   );
 }

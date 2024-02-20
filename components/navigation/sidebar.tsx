@@ -1,10 +1,9 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useAnimation, useCycle } from "framer-motion";
-import { Button } from "@mui/material";
-import HamburgerMenu, { path01Variants, path02Variants } from "./hamburgerMenu";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import HamburgerMenu, { path01Variants, path02Variants } from "./hamburgerMenu";
 
 const links = [
   { name: "Home", to: "/", id: 1 },
@@ -36,34 +35,41 @@ const sideVariants = {
 };
 
 const menuVariant = {
-    open: {
-        width: "300px",
-        height: "280px",
+  open: {
+    width: "300px",
+    height: "280px",
+  },
+
+  closed: {
+    width: 10,
+    height: 10,
+    left: 10,
+    top: 15,
+    opacity: 0,
+    transition: {
+      duration: 0.55,
+      delay: 0.35,
+      type: "tween",
+      ease: [0.76, 0, 0.24, 1],
     },
-
-    closed: {
-      width: 10,
-      height: 10,
-      left: 10,
-      top: 15,
-      opacity: 0,
-      transition: { duration: 0.55, delay: 0.35,type: 'tween', ease: [0.76, 0, 0.24, 1]},
-    }
-    
-}
-
+  },
+};
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const path01Controls = useAnimation();
   const path02Controls = useAnimation();
   return (
-    <main >
+    <main>
       {/* TODO: pathcontrol put into component */}
-      <HamburgerMenu isOpen={open} setOpen={setOpen} className="fixed z-30 p-2" 
-      path01Controls={path01Controls} path02Controls={path02Controls}
+      <HamburgerMenu
+        isOpen={open}
+        setOpen={setOpen}
+        className="fixed z-30 p-2"
+        path01Controls={path01Controls}
+        path02Controls={path02Controls}
       />
       <AnimatePresence>
         {open && (
@@ -77,39 +83,48 @@ export default function Sidebar() {
         )}
       </AnimatePresence>
 
-      
-        <AnimatePresence>
-          {open && (
-            <motion.aside
-              className=" bg-white text-black absolute z-20 rounded-lg inset-0"
-              initial={{ width: 40, height: 40}}
-              variants={menuVariant}
-              animate='open'
-              exit='closed'
+      <AnimatePresence>
+        {open && (
+          <motion.aside
+            className=" bg-white text-black absolute z-20 rounded-lg inset-0"
+            initial={{ width: 40, height: 40 }}
+            variants={menuVariant}
+            animate="open"
+            exit="closed"
+          >
+            <motion.div
+              className="mx-16 my-6 flex flex-col"
+              variants={sideVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
             >
-              <motion.div
-                className="mx-16 my-6 flex flex-col"
-                variants={sideVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-            >
-                {links.map(({ name, to, id }) => (
-                <motion.div variants={itemVariants} className="my-4" whileHover={{scale: 1.1}}>
-                    <Link  key={id} href={to} prefetch className={`link ${pathname === to ? 'text-blue-500' : ''}`}  onClick={async ()=>{
+              {links.map(({ name, to, id }) => (
+                <motion.div
+                  variants={itemVariants}
+                  className="my-4"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <Link
+                    key={id}
+                    href={to}
+                    prefetch
+                    className={`link ${pathname === to ? "text-blue-500" : ""}`}
+                    onClick={async () => {
                       setOpen(false);
                       path01Controls.start(path01Variants.closed);
                       await path02Controls.start(path02Variants.moving);
                       path02Controls.start(path02Variants.closed);
-                    }}>
-                        {name}
-                    </Link>
+                    }}
+                  >
+                    {name}
+                  </Link>
                 </motion.div>
-                ))}
-              </motion.div>
-            </motion.aside>
-          )}
-        </AnimatePresence>
+              ))}
+            </motion.div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

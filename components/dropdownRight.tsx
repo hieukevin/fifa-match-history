@@ -1,32 +1,32 @@
 "use client";
-import { AnimatePresence, motion } from "framer-motion";
-import { IoIosArrowDown } from "react-icons/io";
-import { useState } from "react";
-import Image from "next/image";
-import { InferSchemaType } from "mongoose";
 import { teamStats } from "@/models/models";
+import { AnimatePresence, motion } from "framer-motion";
+import { InferSchemaType } from "mongoose";
+import Image from "next/image";
+import { useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 const sideVariants = {
-    closed: {
-      transition: {
-        staggerChildren: 0.1,
-        staggerDirection: -1,
-      },
+  closed: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: -1,
     },
-    open: {
-      transition: {
-        staggerChildren: 0.1,
-        staggerDirection: 1,
-      },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: 1,
     },
-  };
+  },
+};
 
-  const itemVariants = {
-    closed: {
-      opacity: 0,
-    },
-    open: { opacity: 1 },
-  };
+const itemVariants = {
+  closed: {
+    opacity: 0,
+  },
+  open: { opacity: 1 },
+};
 
 export function DropdownStatsRight({
   teamsStats,
@@ -43,8 +43,16 @@ export function DropdownStatsRight({
   return (
     <div className="z-0 mt-10 mr-4 flex flex-col gap-4 overflow-scroll max-h-screen">
       <div className="grid grid-cols-3 gap-2">
-        {isOpen ? <p className="flex items-center justify-center">Goals</p> : <div></div>}
-        {isOpen ? <p className="flex items-center justify-center ">W/D/L</p> : <div></div>}
+        {isOpen ? (
+          <p className="flex items-center justify-center">Goals</p>
+        ) : (
+          <div></div>
+        )}
+        {isOpen ? (
+          <p className="flex items-center justify-center ">W/D/L</p>
+        ) : (
+          <div></div>
+        )}
         <button onClick={toggleOpen} className="flex justify-end">
           <IoIosArrowDown />
         </button>
@@ -52,12 +60,12 @@ export function DropdownStatsRight({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-          className="flex flex-col gap-4"
-          initial="closed"
-          animate="open"
-          exit="closed"
-          variants={sideVariants}
-      >
+            className="flex flex-col gap-4"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={sideVariants}
+          >
             {teamsStats.map((team, index) => (
               <motion.div
                 key={index}
@@ -73,7 +81,7 @@ export function DropdownStatsRight({
                   {team.draws}/
                   <span className=" text-red-400">{team.losses}</span>
                 </p>
-                
+
                 <div className="w-full h-full flex items-center justify-center">
                   <Image
                     src={`/logos/${team.team}.png`}

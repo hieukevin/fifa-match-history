@@ -6,7 +6,6 @@ import IndividualStatsRight from "@/components/individualStatsRight";
 import OverallStats from "@/components/overallStats";
 import { getTeamStats } from "@/libs/_action";
 
-
 export default async function Home() {
   const hieuTeamStats = await getTeamStats({ user: "Hieu" });
   const kubaTeamStats = await getTeamStats({ user: "Kuba" });
@@ -17,13 +16,16 @@ export default async function Home() {
         <IndividualStatsLeft user="Hieu" />
         <IndividualStatsRight user="Kuba" />
       </div>
-        
+
       <div className="sm:hidden flex justify-between">
-        <DropdownStatsLeft teamsStats={JSON.parse(JSON.stringify(hieuTeamStats))} />
-        <DropdownStatsRight teamsStats={JSON.parse(JSON.stringify(kubaTeamStats))} />
+        <DropdownStatsLeft
+          teamsStats={JSON.parse(JSON.stringify(hieuTeamStats))}
+        />
+        <DropdownStatsRight
+          teamsStats={JSON.parse(JSON.stringify(kubaTeamStats))}
+        />
       </div>
-        <OverallStats />
-      
+      <OverallStats />
     </main>
   );
 }
