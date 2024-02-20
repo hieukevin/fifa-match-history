@@ -4,7 +4,7 @@ import React from "react";
 
 function Page() {
   return (
-    <main className="flex flex-col items-center relative z-20">
+    <main className="flex flex-col items-center relative z-10">
       <h1 className="lg:text-4xl sm:text-4xl text-xl sm:mb-4 mb-2">About</h1>
       <AnimatedText
         el="p"

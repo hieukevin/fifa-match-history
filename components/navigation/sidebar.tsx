@@ -74,7 +74,7 @@ export default function Sidebar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute w-screen h-screen bg-black z-10"
+            className="fixed w-screen h-screen bg-black z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0, transition: { duration: 0.9 } }}
@@ -86,7 +86,7 @@ export default function Sidebar() {
       <AnimatePresence>
         {open && (
           <motion.aside
-            className=" bg-white text-black absolute z-20 rounded-lg inset-0"
+            className=" fixed bg-white text-black  z-20 rounded-lg inset-0"
             initial={{ width: 40, height: 40 }}
             variants={menuVariant}
             animate="open"
