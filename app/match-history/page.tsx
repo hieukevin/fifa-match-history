@@ -1,3 +1,4 @@
+import PageHeader from "@/components/pageHeader";
 import Pagination from "@/components/pagination";
 import { getMatches } from "@/libs/_action";
 import Image from "next/image";
@@ -40,11 +41,11 @@ export default async function Page({
     <main className="h-screen flex flex-col items-center">
     
       <div className="flex flex-col lg:w-[55%] md:w-[80%] w-[95%] gap-5 z-0 flex-1">
-    <h1 className="text-center lg:text-4xl sm:text-4xl text-xl z-10">Match History</h1>
+        <PageHeader title="Match History" />
         {matches.map((match, index) => (
           <div
             key={index}
-            className="rounded-md px-6 sm:py-3 py-2 bg-slate-500 bg-opacity-80"
+            className="rounded-md px-6 sm:py-3 py-2 bg-black bg-opacity-80"
           >
             <div className="flex justify-center">
               <div className="grid sm:grid-cols-3 grid-cols-2 w-full">

@@ -43,7 +43,6 @@ export default function AdminForm({
   useEffect(() => {
     if (state?.message === "success") {
       formRef.current?.reset();
-      console.log("success");
     }
   }, [state]);
 

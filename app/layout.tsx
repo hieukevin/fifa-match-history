@@ -2,10 +2,13 @@ import HeroVideo from "@/components/background";
 import Sidebar from "@/components/navigation/sidebar";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ['200', '300',"400", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +23,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={poppins.className}>
           <HeroVideo />
           <Sidebar />
           {children}

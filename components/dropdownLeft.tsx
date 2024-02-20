@@ -37,7 +37,6 @@ export function DropdownStatsLeft({
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   return (

@@ -61,9 +61,15 @@ export default function Sidebar() {
 
   const path01Controls = useAnimation();
   const path02Controls = useAnimation();
+  const handleCloseMenu = async () => {
+    setOpen(false)
+    path01Controls.start(path01Variants.closed);
+    await path02Controls.start(path02Variants.moving);
+    path02Controls.start(path02Variants.closed);
+  }
   return (
     <main>
-      {/* TODO: pathcontrol put into component */}
+
       <HamburgerMenu
         isOpen={open}
         setOpen={setOpen}
@@ -78,7 +84,7 @@ export default function Sidebar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0, transition: { duration: 0.9 } }}
-            onClick={() => setOpen(false)}
+            onClick={handleCloseMenu}
           />
         )}
       </AnimatePresence>
@@ -110,12 +116,7 @@ export default function Sidebar() {
                     href={to}
                     prefetch
                     className={`link ${pathname === to ? "text-blue-500" : ""}`}
-                    onClick={async () => {
-                      setOpen(false);
-                      path01Controls.start(path01Variants.closed);
-                      await path02Controls.start(path02Variants.moving);
-                      path02Controls.start(path02Variants.closed);
-                    }}
+                    onClick={handleCloseMenu}
                   >
                     {name}
                   </Link>
