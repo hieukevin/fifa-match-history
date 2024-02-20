@@ -51,14 +51,16 @@ export const AnimatedText = ({
       }
     };
 
-    if (isInView) {
-      show();
-    } else {
-      controls.start("hidden");
-    }
+    // if (isInView) {
+    //   show();
+    // } else {
+    //   controls.start("hidden");
+    // }
+    show();
+
 
     return () => clearTimeout(timeout);
-  }, [isInView]);
+  }, []);
 
   return (
     <Wrapper className={className}>
