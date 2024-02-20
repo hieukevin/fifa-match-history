@@ -1,74 +1,25 @@
-'use client'
-import React from 'react'
-import { PieChart } from '@mui/x-charts/PieChart';
-import { useDrawingArea } from '@mui/x-charts/hooks';
-import { styled } from '@mui/material/styles';
+import React from "react";
+import { getGoals, getWins } from "@/libs/_action";
+import DonutChart  from "./pieChart";
+import Link from "next/link";
+import Button from '@mui/material/Button';
 
-const StyledText = styled('text')(({ theme }) => ({
-    fill: theme.palette.text.primary,
-    textAnchor: 'middle',
-    dominantBaseline: 'central',
-    fontSize: 20,
-  }));
 
-  
-function PieCenterLabel({ children }: { children: React.ReactNode }) {
-    const { width, height, left, top } = useDrawingArea();
-    return (
-      <StyledText x={left + width / 2} y={top + height / 2}>
-        {children}
-      </StyledText>
-    );
-  }
 
-function OverallStats() {
+async function OverallStats() {
+  const { win, draws, losses } = await getWins();
+
+  const { totalGoals1, totalGoals2 } = await getGoals();
+
   return (
-      <div className="fixed bottom-0 w-full flex flex-col items-center">
-  <h1>All time record</h1>
-  <p>9-0-6</p>
-  <div className='flex ml-20'>
-
-  <PieChart
-  
-  series={[
-    {
-      data: [
-        { id: 0, value: 9},
-        { id: 1, value:  6},
-      ],
-      innerRadius: 80,
-      outerRadius: 100,
-      paddingAngle: 5,
-      cornerRadius: 5,
-
-    },
-  ]}
-  width={400}
-  height={400}
->  <PieCenterLabel>Wins</PieCenterLabel>
-</PieChart>
-<PieChart
-  series={[
-    {
-      data: [
-        { id: 0, value: 30},
-        { id: 1, value: 20 },
-      ],
-      innerRadius: 80,
-      outerRadius: 100,
-      paddingAngle: 5,
-      cornerRadius: 5,
-    },
-  ]}
-  width={400}
-    height={400}
-><PieCenterLabel>Gols</PieCenterLabel> </PieChart>
-</div>
-
-</div>
-
-
-  )
+    <div className="fixed sm:bottom-0 w-full flex flex-col items-center">
+      <h1 className="sm:text-sm">All time record</h1>
+      <p className="sm:text-sm">{win} - {draws} - {losses}</p>
+      <div className="hidden sm:block">
+        <DonutChart wins={win} losses={losses} goals1={totalGoals1} goals2={totalGoals2} />
+      </div>
+    </div>
+  );
 }
 
-export default OverallStats
+export default OverallStats;

@@ -1,12 +1,15 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 function Header() {
   return (
-    <div className="fixed w-full flex flex-col text-white text-center top-1/3">
-    <h1 className=" lg:text-7xl text-4xl mb-4">Hieu vs Kuba</h1>
-    <p className="text-5xl">FIFA 23 stats</p>
-  </div>
-  )
+    <div>
+      <div className="relative w-full flex flex-col text-white text-center">
+        <h1 className="lg:text-4xl sm:text-4xl text-xl sm:mb-4 mb-2">Hieu vs Kuba</h1>
+        <p className="sm:text-2xl text-sm">FIFA 23 stats</p>
+      </div>
+    </div>
+  );
 }
 
-export default Header
+export default Header;

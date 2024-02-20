@@ -8,3 +8,14 @@ export type TeamStats = {
     draws: number;
     losses: number;
   };
+
+export interface TeamStatsDocument extends Document {
+  team: string;
+  games: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goalsScored: number;
+  goalsConcede: number;
+  user: string;
+}

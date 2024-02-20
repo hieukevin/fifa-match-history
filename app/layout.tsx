@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import Link from "next/link";
+import HeroVideo from "@/components/background";
+import Sidebar from "@/components/navigation/sidebar";
+import StickyCursor from "@/components/stickyCursor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <HeroVideo />
+          <Sidebar />
+              {children}
+          </body>
+      </html>
+    </ClerkProvider>
   );
 }
