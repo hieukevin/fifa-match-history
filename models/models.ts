@@ -6,13 +6,13 @@ export const User = new mongoose.Schema({
     wins:  {type: Number, default: 0},
     draws: {type: Number, default: 0},
     losses: {type: Number, default: 0},
-    throphies: {type: Number, default: 0},
     teams: Array,
     admin: {type: Boolean, default: false}
 })
 
 export const Match = new mongoose.Schema({
     datePlayed: { type: String, default: () => new Date().toISOString() },
+    createdAt: { type: Date, default: Date.now },
     player1: {type: User, required: true},
     player2: {type: User, required: true},
     player1Score: {type: Number, required: true},

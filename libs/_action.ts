@@ -1,11 +1,10 @@
 'use server'
 
-import { MatchModel, TeamStatsModel, User, UserModel } from "@/models/models"
-import { InferSchemaType } from "mongoose"
-import { revalidatePath } from "next/cache"
-import { z } from "zod"
-import { connectToDatabase } from "./db"
-import { TeamStatsDocument } from "@/app/type"
+import {MatchModel, TeamStatsModel, User, UserModel} from "@/models/models"
+import {InferSchemaType} from "mongoose"
+import {revalidatePath} from "next/cache"
+import {z} from "zod"
+import {connectToDatabase} from "./db"
 
 
 export async function getUser({name}: {name: string}): Promise<InferSchemaType<typeof User>>{
@@ -255,8 +254,7 @@ export async function getGoals(){
 export async function getTeamStats({user}: {user: string}){
     try {
         await connectToDatabase()
-        const teamStats = await TeamStatsModel.find({user: user})
-        return teamStats
+        return await TeamStatsModel.find({user: user})
     }
     catch (error) {
         throw new Error('Error getting team stats')
@@ -266,10 +264,9 @@ export async function getTeamStats({user}: {user: string}){
 export async function getMatches({perPage, page}: {perPage: number, page: number}){
     try {
         await connectToDatabase()
-        const matches = await MatchModel.find().sort({datePlayed: -1}).skip(perPage * (page-1)).limit(perPage)
+        const matches = await MatchModel.find().sort({createdAt: -1}).skip((perPage) * (page- 1)).limit(perPage)
         const matchesCount = await MatchModel.countDocuments()
-        const response = { matches, matchesCount }
-        return response
+        return {matches, matchesCount}
     }
     catch (error) {
         throw new Error('Error getting matches')

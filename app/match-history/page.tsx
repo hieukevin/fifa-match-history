@@ -56,7 +56,7 @@ export default async function Page({
                   width={64}
                   height={64}
                   style={{ objectFit: 'contain' }}
-                  className="sm:m-5 m-2"
+                  className="sm:m-5 m-1"
                 />
                 <p className="flex items-center justify-center font-semibold text-lg">
                   {match.player1Score}
